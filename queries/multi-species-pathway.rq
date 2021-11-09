@@ -1,7 +1,7 @@
 # Check for all WikiPathways pathways in which taxon its genes/proteins are found (besides human)
 
 SELECT DISTINCT ?wpid (group_concat(DISTINCT(?name);separator=" | ") as ?species) (count(DISTINCT(?taxon)) AS ?num) WHERE {  
-    values ?type { wd:Q7187 wd:Q8054}
+  VALUES ?type { wd:Q7187 wd:Q8054}
   ?pathway wdt:P31 wd:Q4915012.
   ?pathway wdt:P2410 ?wpid.
   ?pathway wdt:P527 ?gene.
@@ -9,5 +9,5 @@ SELECT DISTINCT ?wpid (group_concat(DISTINCT(?name);separator=" | ") as ?species
   ?gene wdt:P703 ?taxon.
   ?taxon wdt:P225 ?name.
 }
-group by ?wpid
-order by DESC(?num)
+GROUP BY ?wpid
+ORDER BY DESC(?num)
