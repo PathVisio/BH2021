@@ -1,6 +1,6 @@
 # Find genes/proteins in human pathways that are found in a different species
 
-SELECT DISTINCT ?pathway ?wpid ?gene ?geneLabel ?name WHERE {  
+SELECT DISTINCT ?pathway ?gene ?geneLabel ?name WHERE {  
   VALUES ?type { wd:Q7187 wd:Q8054}
   ?pathway wdt:P31 wd:Q4915012.
   ?pathway wdt:P2410 ?wpid.
