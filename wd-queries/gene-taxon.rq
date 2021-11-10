@@ -1,0 +1,14 @@
+# Find genes/proteins in human pathways that are found in a different species
+
+SELECT DISTINCT ?pathway ?wpid ?gene ?geneLabel ?name WHERE {  
+  VALUES ?type { wd:Q7187 wd:Q8054}
+  ?pathway wdt:P31 wd:Q4915012.
+  ?pathway wdt:P2410 ?wpid.
+  ?pathway wdt:P527 ?gene.
+  ?gene wdt:P31 ?type.
+  ?gene wdt:P703 ?taxon.
+  ?taxon wdt:P225 ?name.
+  
+  FILTER(?taxon != wd:Q15978631).
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
