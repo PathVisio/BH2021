@@ -1,0 +1,35 @@
+# Find complex participants in pathways > manual curation needed (just because participants are in pathway, doesn't mean they are in a complex
+
+SELECT DISTINCT ?wpid ?complex ?protein_c_group ?uniprot_c_group
+WITH {
+  
+  SELECT DISTINCT ?complex (GROUP_CONCAT(?protein;SEPARATOR=" ") AS ?protein_c_group) (GROUP_CONCAT(?uniprot;SEPARATOR=" ") AS ?uniprot_c_group) (COUNT(?protein) AS ?protein_c_count) WHERE {
+    ?complex wdt:P31 wd:Q107509287.
+    ?complex wdt:P703 wd:Q15978631.
+    ?complex wdt:P527 ?protein.
+    ?protein wdt:P352 ?uniprot.  
+  }
+  group by ?complex
+  HAVING(?protein_c_count > 1)
+  order by ?protein
+} AS %complexes
+WITH {
+  
+  SELECT DISTINCT ?wpid (GROUP_CONCAT(?protein;SEPARATOR=" ") AS ?protein_p_group) WHERE {
+  ?pathway wdt:P31 wd:Q4915012.
+  ?pathway wdt:P703 wd:Q15978631.
+  ?pathway wdt:P2410 ?wpid.
+  ?pathway wdt:P527 ?gene.
+  ?gene wdt:P688 ?protein.
+  }  
+  group by ?wpid
+  order by ?protein
+           
+} AS %pathways
+WHERE{
+  
+  INCLUDE %complexes
+  INCLUDE %pathways
+    
+  FILTER(CONTAINS(STR(?protein_p_group),STR(?protein_c_group)))
+}
