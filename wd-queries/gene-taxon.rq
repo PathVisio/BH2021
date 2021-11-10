@@ -3,7 +3,7 @@
 SELECT DISTINCT ?pathway ?gene ?geneLabel ?name WHERE {  
   VALUES ?type { wd:Q7187 wd:Q8054}
   ?pathway wdt:P31 wd:Q4915012.
-  ?pathway wdt:703 ?species.
+  ?pathway wdt:P703 ?species.
   ?pathway wdt:P2410 ?wpid.
   ?pathway wdt:P527 ?gene.
   ?gene wdt:P31 ?type.
