@@ -1,5 +1,10 @@
 # Find genes/proteins in human pathways that are found in a different species
 
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
 SELECT DISTINCT ?pathway ?gene ?geneLabel ?name WHERE {  
   VALUES ?type { wd:Q7187 wd:Q8054}
   ?pathway wdt:P31 wd:Q4915012.
