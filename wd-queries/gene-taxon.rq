@@ -5,7 +5,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 
-SELECT DISTINCT ?pathway ?gene ?geneLabel ?name WHERE {  
+SELECT DISTINCT ?pathway ?gene ?geneLabel ?name ?taxon WHERE {  
   VALUES ?type { wd:Q7187 wd:Q8054}
   ?pathway wdt:P31 wd:Q4915012.
   ?pathway wdt:P703 ?species.
