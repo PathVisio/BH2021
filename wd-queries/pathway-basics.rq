@@ -6,7 +6,7 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 
 SELECT ?pathway ?pathwayLabel ?species ?speciesLabel WHERE {
-   ?pathway wdt:P2410 ?wpid ;
-            wdt:P703 ?species .
+   ?pathway wdt:P2410 ?wpid .
+   ?pathway wdt:P703 ?species .
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
